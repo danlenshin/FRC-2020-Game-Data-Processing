@@ -178,6 +178,7 @@ While Not IsEmpty(PDCell)
     teamNum = PDCell.Value
     
     Set PDCell = PDCell.Offset(0, 8)
+    
     PDCell.Value = getAvg(autoBPowerCells, teamNum, "integer", teamNumber, DIRows)
     Set PDCell = PDCell.Offset(0, 1)
     PDCell.Value = getAvg(autoOPowerCells, teamNum, "integer", teamNumber, DIRows)
