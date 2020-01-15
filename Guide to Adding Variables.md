@@ -17,7 +17,8 @@ While Not IsEmpty(DICell)
     Set DICell = DICell.Offset(1, 0)
 Wend
 Set DICell = resetCell(DICell)
-Set DICell = DICell.Offset(0, 1)
+DICellSycle = DICellCycle + 1
+Set DICell = DICell.Offset(2, DICellCycle)
 ```
 
 where ARRAY() is the array which is being modified in the code. Add another code block line this, making sure that ARRAY() has the same name
