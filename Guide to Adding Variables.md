@@ -42,3 +42,5 @@ how well a team does something, where 0 represents the team not doing anything. 
 is "NO DEF," but this can be changed on line 269.
 
 **"games played"** - The spreadsheet will display how many terms there are of this data point for the team. 
+
+**"teleop per second"** - The spreadsheet will display an integer value divided by 135, which is the length of time that the tele-operated period lasts.
