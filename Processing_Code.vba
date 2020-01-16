@@ -189,9 +189,15 @@ While Not IsEmpty(PDCell)
     Set PDCell = PDCell.Offset(0, 1)
     PDCell.Value = getAvg(bPowerCells, teamNum, "integer", teamNumber, DIRows)
     Set PDCell = PDCell.Offset(0, 1)
+    PDCell.Value = getAvg(bPowerCells, teamNum, "teleop per second", teamNumber, DIRows)
+    Set PDCell = PDCell.Offset(0, 1)
     PDCell.Value = getAvg(oPowerCells, teamNum, "integer", teamNumber, DIRows)
     Set PDCell = PDCell.Offset(0, 1)
+    PDCell.Value = getAvg(oPowerCells, teamNum, "teleop per second", teamNumber, DIRows)
+    Set PDCell = PDCell.Offset(0, 1)
     PDCell.Value = getAvg(iPowerCells, teamNum, "integer", teamNumber, DIRows)
+    Set PDCell = PDCell.Offset(0, 1)
+    PDCell.Value = getAvg(iPowerCells, teamNum, "teleop per second", teamNumber, DIRows)
     Set PDCell = PDCell.Offset(0, 1)
     PDCell.Value = getAvg(rotationControl, teamNum, "boolean", teamNumber, DIRows)
     Set PDCell = PDCell.Offset(0, 1)
@@ -274,6 +280,17 @@ Function getAvg(arr() As Integer, team As Integer, varType As String, teamNumArr
     
     ElseIf varType = "games played" Then
         getAvg = amtTeamTerms
+        
+    ElseIf varType = "teleop per second" Then 
+        For i = 0 To amtTeamTerms
+            sum = sum + equalTerms(i)
+        Next i
+        
+        If amtTeamTerms = 0 Then
+            getAvg = ""
+        Else
+            getAvg = (sum / amtTeamTerms) / 135
+        End If
     End If
 End Function
 
