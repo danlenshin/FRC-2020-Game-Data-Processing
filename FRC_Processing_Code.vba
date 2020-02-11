@@ -273,7 +273,7 @@ Function getAvg(arr() As Integer, team As Integer, varType As String, teamNumArr
         If amtTeamTerms = 0 Then
             getAvg = ""
         ElseIf amtTeamTerms = qualAmtZero Then
-            getAvg = "NO DEF"
+            getAvg = 0
         Else
             getAvg = sum / (amtTeamTerms - qualAmtZero)
         End If
