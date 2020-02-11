@@ -131,7 +131,7 @@ DICellCycle = DICellCycle + 1
 Set DICell = DICell.Offset(2, DICellCycle)
 
 Dim PDCellCycle As Integer
-PDCellCycle = 2
+PDCellCycle = 1
 
 Set PDCell = resetCell(PDCell)
 Set PDCell = PDCell.Offset(PDCellCycle, 0)
