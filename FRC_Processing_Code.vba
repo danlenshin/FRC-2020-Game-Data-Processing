@@ -168,7 +168,7 @@ Wend
 Set DICell = resetCell(DICell)
 
 Dim PDCellCycle As Integer
-PDCellCycle = 2
+PDCellCycle = 1
 
 Set PDCell = resetCell(PDCell)
 Set PDCell = PDCell.Offset(PDCellCycle, 0)
@@ -177,7 +177,7 @@ While Not IsEmpty(PDCell)
     Dim teamNum As Integer
     teamNum = PDCell.Value
     
-    Set PDCell = PDCell.Offset(0, 8)
+    Set PDCell = PDCell.Offset(0, 9)
     
     PDCell.Value = getAvg(autoBPowerCells, teamNum, "integer", teamNumber, DIRows)
     Set PDCell = PDCell.Offset(0, 1)
