@@ -1,5 +1,3 @@
-'Written by Daniel Lenshin for Gryphon Robotics (FRC 5549)'
-
 '<<Main Processor Code>>'
 Sub Processor()
 
@@ -22,13 +20,11 @@ Wend
 Set DICell = resetCell(DICell)
 
 Dim teamNumber() As Integer
-Dim autoBPowerCells() As Integer
-Dim autoOPowerCells() As Integer
-Dim autoIPowerCells() As Integer
+Dim autoHPowerCells() As Integer
+Dim autoLPowerCells() As Integer
 Dim autoLineCrossed() As Integer
-Dim bPowerCells() As Integer
-Dim oPowerCells() As Integer
-Dim iPowerCells() As Integer
+Dim hPowerCells() As Integer
+Dim lPowerCells() As Integer
 Dim rotationControl() As Integer
 Dim positionControl() As Integer
 Dim hangComplete() As Integer
@@ -37,13 +33,11 @@ Dim defenseSkill() As Integer
 Dim win() As Integer
 
 ReDim teamNumber(DIRows) As Integer
-ReDim autoBPowerCells(DIRows) As Integer
-ReDim autoOPowerCells(DIRows) As Integer
-ReDim autoIPowerCells(DIRows) As Integer
+ReDim autoHPowerCells(DIRows) As Integer
+ReDim autoLPowerCells(DIRows) As Integer
 ReDim autoLineCrossed(DIRows) As Integer
-ReDim bPowerCells(DIRows) As Integer
-ReDim oPowerCells(DIRows) As Integer
-ReDim iPowerCells(DIRows) As Integer
+ReDim hPowerCells(DIRows) As Integer
+ReDim lPowerCells(DIRows) As Integer
 ReDim rotationControl(DIRows) As Integer
 ReDim positionControl(DIRows) As Integer
 ReDim hangComplete(DIRows) As Integer
@@ -66,7 +60,7 @@ DICellCycle = DICellCycle + 1
 Set DICell = DICell.Offset(2, DICellCycle)
 
 While Not IsEmpty(DICell)
-    autoBPowerCells(DICell.row - 2) = DICell.Value
+    autoHPowerCells(DICell.row - 2) = DICell.Value
     Set DICell = DICell.Offset(1, 0)
 Wend
 Set DICell = resetCell(DICell)
@@ -74,15 +68,7 @@ DICellCycle = DICellCycle + 1
 Set DICell = DICell.Offset(2, DICellCycle)
 
 While Not IsEmpty(DICell)
-    autoOPowerCells(DICell.row - 2) = DICell.Value
-    Set DICell = DICell.Offset(1, 0)
-Wend
-Set DICell = resetCell(DICell)
-DICellCycle = DICellCycle + 1
-Set DICell = DICell.Offset(2, DICellCycle)
-
-While Not IsEmpty(DICell)
-    autoIPowerCells(DICell.row - 2) = DICell.Value
+    autoLPowerCells(DICell.row - 2) = DICell.Value
     Set DICell = DICell.Offset(1, 0)
 Wend
 Set DICell = resetCell(DICell)
@@ -98,7 +84,7 @@ DICellCycle = DICellCycle + 1
 Set DICell = DICell.Offset(2, DICellCycle)
 
 While Not IsEmpty(DICell)
-    bPowerCells(DICell.row - 2) = DICell.Value
+    hPowerCells(DICell.row - 2) = DICell.Value
     Set DICell = DICell.Offset(1, 0)
 Wend
 Set DICell = resetCell(DICell)
@@ -106,15 +92,7 @@ DICellCycle = DICellCycle + 1
 Set DICell = DICell.Offset(2, DICellCycle)
 
 While Not IsEmpty(DICell)
-    oPowerCells(DICell.row - 2) = DICell.Value
-    Set DICell = DICell.Offset(1, 0)
-Wend
-Set DICell = resetCell(DICell)
-DICellCycle = DICellCycle + 1
-Set DICell = DICell.Offset(2, DICellCycle)
-
-While Not IsEmpty(DICell)
-    iPowerCells(DICell.row - 2) = DICell.Value
+    lPowerCells(DICell.row - 2) = DICell.Value
     Set DICell = DICell.Offset(1, 0)
 Wend
 Set DICell = resetCell(DICell)
@@ -178,26 +156,19 @@ While Not IsEmpty(PDCell)
     teamNum = PDCell.Value
     
     Set PDCell = PDCell.Offset(0, 9)
-    
-    PDCell.Value = getAvg(autoBPowerCells, teamNum, "integer", teamNumber, DIRows)
+    PDCell.Value = getAvg(autoHPowerCells, teamNum, "integer", teamNumber, DIRows)
     Set PDCell = PDCell.Offset(0, 1)
-    PDCell.Value = getAvg(autoOPowerCells, teamNum, "integer", teamNumber, DIRows)
-    Set PDCell = PDCell.Offset(0, 1)
-    PDCell.Value = getAvg(autoIPowerCells, teamNum, "integer", teamNumber, DIRows)
+    PDCell.Value = getAvg(autoLPowerCells, teamNum, "integer", teamNumber, DIRows)
     Set PDCell = PDCell.Offset(0, 1)
     PDCell.Value = getAvg(autoLineCrossed, teamNum, "boolean", teamNumber, DIRows)
     Set PDCell = PDCell.Offset(0, 1)
-    PDCell.Value = getAvg(bPowerCells, teamNum, "integer", teamNumber, DIRows)
+    PDCell.Value = getAvg(hPowerCells, teamNum, "integer", teamNumber, DIRows)
     Set PDCell = PDCell.Offset(0, 1)
-    PDCell.Value = getAvg(bPowerCells, teamNum, "teleop per second", teamNumber, DIRows)
+    PDCell.Value = getAvg(hPowerCells, teamNum, "teleop per second", teamNumber, DIRows)
     Set PDCell = PDCell.Offset(0, 1)
-    PDCell.Value = getAvg(oPowerCells, teamNum, "integer", teamNumber, DIRows)
+    PDCell.Value = getAvg(lPowerCells, teamNum, "integer", teamNumber, DIRows)
     Set PDCell = PDCell.Offset(0, 1)
-    PDCell.Value = getAvg(oPowerCells, teamNum, "teleop per second", teamNumber, DIRows)
-    Set PDCell = PDCell.Offset(0, 1)
-    PDCell.Value = getAvg(iPowerCells, teamNum, "integer", teamNumber, DIRows)
-    Set PDCell = PDCell.Offset(0, 1)
-    PDCell.Value = getAvg(iPowerCells, teamNum, "teleop per second", teamNumber, DIRows)
+    PDCell.Value = getAvg(lPowerCells, teamNum, "teleop per second", teamNumber, DIRows)
     Set PDCell = PDCell.Offset(0, 1)
     PDCell.Value = getAvg(rotationControl, teamNum, "boolean", teamNumber, DIRows)
     Set PDCell = PDCell.Offset(0, 1)
@@ -273,7 +244,7 @@ Function getAvg(arr() As Integer, team As Integer, varType As String, teamNumArr
         If amtTeamTerms = 0 Then
             getAvg = ""
         ElseIf amtTeamTerms = qualAmtZero Then
-            getAvg = 0
+            getAvg = "NO DEF"
         Else
             getAvg = sum / (amtTeamTerms - qualAmtZero)
         End If
@@ -281,8 +252,8 @@ Function getAvg(arr() As Integer, team As Integer, varType As String, teamNumArr
     ElseIf varType = "games played" Then
         getAvg = amtTeamTerms
         
-    ElseIf varType = "teleop per second" Then 
-        For i = 0 To amtTeamTerms
+    ElseIf varType = "teleop per second" Then
+                For i = 0 To amtTeamTerms
             sum = sum + equalTerms(i)
         Next i
         
@@ -291,6 +262,7 @@ Function getAvg(arr() As Integer, team As Integer, varType As String, teamNumArr
         Else
             getAvg = (sum / amtTeamTerms) / 135
         End If
+    
     End If
 End Function
 
@@ -300,3 +272,4 @@ Function resetCell(rng As Range) As Range
     Set resetCell = Worksheets(rng.Worksheet.Name).Cells(1, 1)
     
 End Function
+
